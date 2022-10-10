@@ -1,6 +1,5 @@
 import { AxiosError, AxiosResponse } from "axios";
 import {
-  API_URL,
   COOKIE_ACCESS_TOKEN,
   COOKIE_REFRESH_TOKEN,
   INTERNET_NOT_AVAILABLE,
@@ -130,6 +129,6 @@ export function configureHttpClient() {
   };
 
   HttpClient.setUrl = (url) => {
-    return `${process.env.IS_SERVER ? API_URL : ""}${url}`;
+    return `${process.env.IS_SERVER ? `http://localhost:${process.env.PORT || 5000}` : ""}${url}`;
   };
 }

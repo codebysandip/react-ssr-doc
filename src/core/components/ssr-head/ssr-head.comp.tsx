@@ -21,12 +21,12 @@ export function SsrHead() {
 
   return (
     <Helmet>
-      <title>Default Title</title>
+      <title>React SSR Architecture Documentation</title>
       <script nonce="react-ssr">{`${serviceWorker}`}</script>
       <meta
         name="description"
         content="Open Source React SSR High Performance Architecture.
-      Goal of this architecture to saves month of initial phase development"
+      Goal of this architecture to save month of initial phase development"
       />
       <meta
         name="keywords"
@@ -40,6 +40,12 @@ export function SsrHead() {
       />
       <link href={spinner} rel="preload" as="image" />
       <link rel="apple-touch-icon" href="/assets/icons/ios/192.png" />
+      <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet"
+        type="text/css"
+      ></link>
+      <body className="body-green" />
     </Helmet>
   );
 }

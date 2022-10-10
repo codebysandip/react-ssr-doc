@@ -41,6 +41,8 @@ declare global {
              */
             LOCAL_API_SERVER: string;
             NODE_ENV?: string;
+            CONTENTFUL_SPACE_ID: string;
+            CONTENTFUL_ACCESS_TOKEN: string;
         }
     }
 }

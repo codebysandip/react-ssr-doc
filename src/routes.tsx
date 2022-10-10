@@ -38,4 +38,10 @@ export const Routes: IRoute[] = [
     component: () => import(/* webpackChunkName: "500" */ "src/pages/error/500/500.component.js"),
     isSSR: false,
   },
+  {
+    path: "/:pageId",
+    component: () =>
+      import(/* webpackChunkName: "content-page" */ "pages/content-page/content-page.comp.js"),
+    isSSR: true,
+  },
 ];

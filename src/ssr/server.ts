@@ -2,6 +2,7 @@ import express from "express";
 import { join } from "path";
 
 import bodyParser from "body-parser";
+import * as contentfulRaw from "contentful";
 import helmet from "helmet";
 import NodeCache from "node-cache";
 import { createRequire } from "node:module";
@@ -13,6 +14,13 @@ import { processRequest } from "./middlewares/process-request.middleware.js";
 import { StaticRoute } from "./middlewares/static-files.middleware.js";
 
 const require = createRequire(import.meta.url);
+const contentful = ((contentfulRaw as any).default ?? contentfulRaw) as typeof contentfulRaw;
+// const contentful = require("contentful");
+console.log("contentful!!", contentful);
+const contentfulClient = contentful.createClient({
+  space: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+});
 
 (global as any).staticPageCache = new NodeCache();
 // page components can use metaJson to load page css on before loading of client Js
@@ -25,7 +33,8 @@ app.use(
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        "script-src": "'self' 'nonce-react-ssr' 'unsafe-inline' 'unsafe-eval'",
+        "script-src":
+          "'self' 'nonce-react-ssr' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com/ajax/libs/prism/*",
         "img-src": "'self' data: https://fakestoreapi.com",
       },
     },
@@ -62,6 +71,12 @@ if (!API_URL) {
     "Please add .env file if not available. Add LOCAL_API_SERVER and API_BASE_URL in .env file",
   );
 }
+
+app.get("/api/cms/:pageId", (req, resp) => {
+  contentfulClient.getEntries({ content_type: req.params.pageId }).then((entries) => {
+    resp.json(entries.items[0]);
+  });
+});
 // proxy to api to tackle cors problem
 app.all("/api/*", proxyMiddleware(API_URL));
 
