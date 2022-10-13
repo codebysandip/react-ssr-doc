@@ -16,11 +16,6 @@ body {
   min-height: 100%;
   /* equal to footer height */
   margin-bottom: -50px;
-  &:after {
-    content: "";
-    display: block;
-    height: 50px;
-  }
 }
 
 .footer {
@@ -43,16 +38,16 @@ a {
   }
 }
 
-code {
-  background: #222;
-  color: #fff;
-  font-size: 14px;
-  font-weight: bold;
-  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  padding: 2px 8px;
-  padding-top: 4px;
-  display: inline-block;
-}
+// code {
+//   background: #222;
+//   color: #fff;
+//   font-size: 14px;
+//   font-weight: bold;
+//   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+//   padding: 2px 8px;
+//   padding-top: 4px;
+//   display: inline-block;
+// }
 
 .btn,
 a.btn {
@@ -311,12 +306,12 @@ select {
   margin-bottom: 0;
   padding: 0;
   li {
-    color: rgba(256, 256, 256, 0.5);
+    color: white;
     &.active {
-      color: rgba(256, 256, 256, 0.5);
+      color: rgb(194, 194, 194);
     }
     a {
-      color: rgba(256, 256, 256, 0.5);
+      color: white;
       &:hover {
         color: #fff;
       }

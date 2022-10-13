@@ -2,6 +2,7 @@
 .doc-wrapper {
   padding: 45px 0;
   background: $smoky-grey;
+  min-height: calc(100vh - 113px - 45px);
 }
 
 .doc-body {
@@ -38,7 +39,7 @@
     width: 30px;
   }
   .meta {
-    color: $grey;
+    // color: $grey;
     svg {
       width: 14px;
     }
@@ -423,11 +424,7 @@
 }
 
 .doc-nav {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
 }
 
 .sticky {

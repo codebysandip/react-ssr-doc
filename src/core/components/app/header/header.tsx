@@ -1,12 +1,18 @@
 import { logout as logoutAction } from "pages/auth/auth.redux.js";
 import { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { searchText } from "src/app.redux.js";
 import { ROUTE_LOGIN } from "src/const.js";
 import { withRouter, WithRouterProps } from "src/core/hoc/with-routes.hoc.js";
 import { CommonService } from "src/core/services/common.service.js";
 import { AppDispatch, RootState } from "src/redux/create-store.js";
 
-class HeaderComp extends Component<HeaderProps> {
+class HeaderComp extends Component<HeaderProps, HeaderState> {
+  public readonly state: Readonly<HeaderState> = {
+    searchText: "",
+  };
+
   public logout() {
     this.props.logout();
     CommonService.logout();
@@ -19,26 +25,34 @@ class HeaderComp extends Component<HeaderProps> {
     }
   }
 
+  public search() {
+    if (this.state.searchText.length >= 3) {
+      this.props.search(this.state.searchText);
+    }
+  }
+
   render() {
     return (
       <header id="header" className="header">
         <div className="container">
           <div className="branding">
             <h1 className="logo">
-              <a href="index.html">
+              <Link to="/">
                 <span aria-hidden="true" className="icon_documents_alt icon"></span>
                 <span className="text-highlight">React SSR</span>
                 <span className="text-bold">Docs</span>
-              </a>
+              </Link>
             </h1>
           </div>
 
-          <ol className="breadcrumb">
-            <li className="breadcrumb-item">
-              <a href="index.html">Home</a>
-            </li>
-            <li className="breadcrumb-item active">Quick Start</li>
-          </ol>
+          {this.props.docHeader && (
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item">
+                <Link to="/">Home</Link>
+              </li>
+              <li className="breadcrumb-item active">{this.props.docHeader?.title}</li>
+            </ol>
+          )}
 
           <div className="top-search-box">
             <form className="form-inline search-form justify-content-center" action="" method="get">
@@ -47,9 +61,19 @@ class HeaderComp extends Component<HeaderProps> {
                 placeholder="Search..."
                 name="search"
                 className="form-control search-input"
+                value={this.state.searchText}
+                onChange={(event) => this.setState({ searchText: event.target.value })}
               />
 
-              <button type="submit" className="btn search-btn" value="Search">
+              <button
+                className="btn search-btn"
+                value="Search"
+                type="button"
+                id="searchButton"
+                aria-label="Search Button"
+                role="button"
+                onClick={() => this.search()}
+              >
                 <svg
                   className="svg-inline--fa fa-magnifying-glass"
                   aria-hidden="true"
@@ -79,12 +103,14 @@ const mapStateToProps = (state: RootState) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
     header: state.app.header,
+    docHeader: state.app.docHeader,
   };
 };
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     logout: () => dispatch(logoutAction()),
+    search: (q: string) => dispatch(searchText(q)),
   };
 };
 
@@ -94,3 +120,7 @@ export interface HeaderProps
   extends WithRouterProps,
     ReturnType<typeof mapDispatchToProps>,
     ReturnType<typeof mapStateToProps> {}
+
+export interface HeaderState {
+  searchText: string;
+}

@@ -35,7 +35,7 @@ function startLighthouse() {
       // screenEmulation: { width: 1280, height: 720 },
       // budgetPath: join(cwd(), "lighthouse/budget.json"),
     };
-    const runnerResult = await lighthouse("http://localhost:5000/gettingStarted", options);
+    const runnerResult = await lighthouse("http://localhost:5000/doc/getting-started", options);
 
     // `.report` is the HTML report as a string
     const reportHtml = runnerResult.report;

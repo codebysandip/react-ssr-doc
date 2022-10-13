@@ -39,9 +39,9 @@ export const Routes: IRoute[] = [
     isSSR: false,
   },
   {
-    path: "/:pageId",
+    path: "/doc/:pageId",
     component: () =>
-      import(/* webpackChunkName: "content-page" */ "pages/content-page/content-page.comp.js"),
+      import(/* webpackChunkName: "doc-page" */ "src/pages/doc-page/doc-page.comp.js"),
     isSSR: true,
   },
 ];

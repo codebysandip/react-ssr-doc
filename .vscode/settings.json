@@ -17,6 +17,7 @@
     "formik",
     "glyphicon",
     "invisibles",
+    "kebabize",
     "lcov",
     "maxlength",
     "mddir",
@@ -41,5 +42,7 @@
   "[html]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
-  "cSpell.enableFiletypes": ["!json", "!yaml"]
+  "cSpell.enableFiletypes": ["!json", "!yaml"],
+  "css.lint.validProperties": ["speak"],
+  "scss.lint.validProperties": ["speak"]
 }

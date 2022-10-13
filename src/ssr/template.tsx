@@ -36,7 +36,7 @@ export class HtmlTemplate extends Component<HtmlTemplateProps> {
         <body {...helmetBody}>
           {helmet.noscript.toComponent()}
           <div id="root" dangerouslySetInnerHTML={{ __html: this.props.html }}></div>
-          <script dangerouslySetInnerHTML={{ __html: ssrDataScript }} nonce="react-ssr"></script>
+          <script dangerouslySetInnerHTML={{ __html: ssrDataScript }}></script>
           <script src={metaJson.mainJs}></script>
           {helmet.script.toComponent()}
         </body>

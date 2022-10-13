@@ -1,6 +1,6 @@
 import { ApiResponse } from "core/services/http-client.js";
 import { createStore, replaceReducer } from "src/redux/create-store";
-import { fetchHeader } from "./app.redux.js";
+import { fetchSideMenu } from "./app.redux.js";
 import { PAGE_INVALID_RETURN_DATA, ROUTE_403, ROUTE_404, ROUTE_500, ROUTE_LOGIN } from "./const.js";
 import { getRoute } from "./core/functions/get-route.js";
 import { getAccessTokenData } from "./core/functions/get-token.js";
@@ -36,7 +36,7 @@ export const ssrConfig: SSRConfig = {
     // Route.isSSR will false then server will not send page data and header data
     // so on client side fetch data for header
     if ((process.env.IS_SERVER && route?.isSSR) || (!process.env.IS_SERVER && isFirstRendering)) {
-      return store.dispatch(fetchHeader());
+      return store.dispatch(fetchSideMenu());
     }
   },
   getSsrData: (ctx: ContextData) => {

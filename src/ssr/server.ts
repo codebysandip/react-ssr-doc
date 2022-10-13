@@ -8,6 +8,10 @@ import NodeCache from "node-cache";
 import { createRequire } from "node:module";
 import { API_URL, LOCAL_API_SERVER } from "src/const.js";
 import { configureHttpClient } from "src/core/functions/configure-http-client.js";
+import {
+  removeFieldsKey,
+  removeSysAndMetaData,
+} from "src/core/functions/remove-sys-and-meta-data.js";
 import { proxyMiddleware } from "src/ssr/middlewares/proxy-middleware.js";
 import { getWebpackBuildMetaJson } from "./functions/get-webpack-build-meta-json.js";
 import { processRequest } from "./middlewares/process-request.middleware.js";
@@ -33,9 +37,8 @@ app.use(
     contentSecurityPolicy: {
       useDefaults: true,
       directives: {
-        "script-src":
-          "'self' 'nonce-react-ssr' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com/ajax/libs/prism/*",
-        "img-src": "'self' data: https://fakestoreapi.com",
+        "script-src": "'self' 'unsafe-inline' 'unsafe-eval'",
+        "img-src": "'self' data: https://images.ctfassets.net",
       },
     },
     crossOriginEmbedderPolicy: false,
@@ -73,10 +76,61 @@ if (!API_URL) {
 }
 
 app.get("/api/cms/:pageId", (req, resp) => {
-  contentfulClient.getEntries({ content_type: req.params.pageId }).then((entries) => {
-    resp.json(entries.items[0]);
-  });
+  const query: Record<string, any> = { content_type: req.params.pageId, include: 4 };
+  if (req.query.pageType === "DOC_PAGE") {
+    query.content_type = "documentationPage";
+    query["fields.navigation.sys.contentType.sys.id"] = "navigation";
+    query["fields.navigation.fields.url"] = `/doc/${req.params.pageId}`;
+  }
+  contentfulClient
+    .getEntries(query)
+    .then((entries) => {
+      let entry = entries.items[0] as Record<string, any>;
+      if (!entry) {
+        resp.status(404).json({});
+        return;
+      }
+      const lastUpdated = entry.sys.updatedAt;
+      removeSysAndMetaData(entry);
+      entry = removeFieldsKey(entry);
+      resp.json({ ...entry, lastUpdated });
+    })
+    .catch((error) => {
+      console.error("Contentful error", error);
+      resp.status(404).json({});
+    });
 });
+
+app.get("/api/cms/entries/:contentType", (req, resp) => {
+  contentfulClient
+    .getEntries({ content_type: req.params.contentType, include: 5 })
+    .then((entries: Record<string, any>) => {
+      removeSysAndMetaData(entries);
+      entries = removeFieldsKey(entries);
+
+      resp.json(entries);
+    })
+    .catch((error) => {
+      console.error("Contentful error", error);
+      resp.status(404).json({});
+    });
+});
+
+app.get("/api/cms/search/:searchText", (req, resp) => {
+  contentfulClient
+    .getEntries({ query: req.params.searchText, include: 4 })
+    .then((entries: Record<string, any>) => {
+      removeSysAndMetaData(entries);
+      entries = removeFieldsKey(entries);
+
+      resp.json(entries);
+    })
+    .catch((error) => {
+      console.error("Contentful error", error);
+      resp.status(204).json({});
+    });
+});
+
 // proxy to api to tackle cors problem
 app.all("/api/*", proxyMiddleware(API_URL));
 

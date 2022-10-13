@@ -8,6 +8,7 @@
  * Twitter: @3rdwave_themes
  * Website: http://themes.3rdwavemedia.com/
 */
+@import "node_modules/bootstrap/scss/bootstrap-utilities.scss";
 
 //*************************** Theme Colors ****************************/
 // Define theme color scheme
@@ -37,23 +38,27 @@ $twitter: #55acee;
 $google: #dd4b39;
 $github: #444;
 
-@import "node_modules/bootstrap/scss/bootstrap-utilities.scss";
-@import "node_modules/bootstrap/scss/reboot";
-@import "node_modules/bootstrap/scss/root";
+@import "/node_modules/bootstrap/scss/reboot";
+@import "/node_modules/bootstrap/scss/root";
 
-@import "node_modules/bootstrap/scss/breadcrumb";
-@import "node_modules/bootstrap/scss/containers";
-@import "node_modules/bootstrap/scss/forms";
-@import "node_modules/bootstrap/scss/grid";
-@import "node_modules/bootstrap/scss/navbar";
+@import "/node_modules/bootstrap/scss/breadcrumb";
+@import "/node_modules/bootstrap/scss/containers";
+@import "/node_modules/bootstrap/scss/forms";
+@import "/node_modules/bootstrap/scss/grid";
+@import "/node_modules/bootstrap/scss/buttons";
+@import "/node_modules/bootstrap/scss/nav";
+@import "/node_modules/bootstrap/scss/navbar";
+@import "/node_modules/bootstrap/scss/transitions";
 
-//*************************** Theme Styles ****************************/
-// Import theme styles
+//*************************** Theme Styles ****************************/ // Import theme styles
 @import "mixins";
 @import "base";
 @import "doc";
 @import "landing";
 @import "./plugins/elegant-font/style.css";
-:not(pre) > code[class*="language-"] {
-  white-space: pre-wrap !important;
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 90%;
+  }
 }

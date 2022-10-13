@@ -22,7 +22,7 @@ export function SsrHead() {
   return (
     <Helmet>
       <title>React SSR Architecture Documentation</title>
-      <script nonce="react-ssr">{`${serviceWorker}`}</script>
+      <script>{`${serviceWorker}`}</script>
       <meta
         name="description"
         content="Open Source React SSR High Performance Architecture.
@@ -45,7 +45,7 @@ export function SsrHead() {
         rel="stylesheet"
         type="text/css"
       ></link>
-      <body className="body-green" />
+      <body className="body-orange" />
     </Helmet>
   );
 }
