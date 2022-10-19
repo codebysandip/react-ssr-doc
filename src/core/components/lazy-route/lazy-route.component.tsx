@@ -10,6 +10,8 @@ import { Toaster } from "src/core/models/toaster.model.js";
 import { HttpClient, isOnline, retryPromise } from "src/core/services/http-client.js";
 import { Loader } from "../loader/loader.comp.js";
 
+let locationPath = process.env.IS_SERVER ? "default" : location.pathname;
+
 /**
  * Lazy Load Route Component
  * @param props {@link LazyProps}
@@ -27,7 +29,6 @@ export default function LazyRoute(props: LazyProps) {
   const location = useLocation();
   const navigate = useNavigate();
   const searchParams = useSearchParams();
-
   // if IRoute.isSSR will false then server will not process request for any api calls
   // in that case page data will not available on client. So need to fetch data on client for page
   let route: IRoute | undefined;
@@ -56,9 +57,11 @@ export default function LazyRoute(props: LazyProps) {
   }
 
   useEffect(() => {
-    if (location.key === "default") {
+    if (locationPath === location.pathname) {
       return;
     }
+    locationPath = location.pathname;
+
     module = undefined;
     window.__SSRDATA__ = null;
     retryPromise(isOnline, 1000, HttpClient.maxRetryCount)

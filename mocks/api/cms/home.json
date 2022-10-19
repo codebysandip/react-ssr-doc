@@ -1,0 +1,429 @@
+{
+  "name": "Home page",
+  "navigation": {
+    "text": "Home",
+    "url": "/content/home",
+    "pageType": "CONTENT_PAGE",
+    "sysId": "navigation"
+  },
+  "tagLines": [
+    "A High Performance React SSR Architecture",
+    "Architect with love of developers "
+  ],
+  "styles": [
+    "h2.title {font-weight: 700;margin-bottom: 2rem;}"
+  ],
+  "components": [
+    {
+      "title": "React SSR Architecture",
+      "intro": {
+        "nodeType": "document",
+        "data": {},
+        "content": [
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "React SSR Architecture is a ",
+                "marks": [],
+                "data": {}
+              },
+              {
+                "nodeType": "text",
+                "value": "open source",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "data": {}
+              },
+              {
+                "nodeType": "text",
+                "value": " high performance base architecture. It is optimised to achieve green google lighthouse score. It's a guideline from a frontend Architect to ensure your project to be perform same with every new build.\n",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          }
+        ]
+      },
+      "cta": {
+        "text": "Getting Started",
+        "url": "/doc/getting-started",
+        "pageType": "DOC_PAGE",
+        "sysId": "navigation"
+      },
+      "sysId": "introWithCtaBanner"
+    },
+    {
+      "title": "Lighthouse Score",
+      "intro": {
+        "nodeType": "document",
+        "data": {},
+        "content": [
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "React SSR docs",
+                "marks": [
+                  {
+                    "type": "bold"
+                  }
+                ],
+                "data": {}
+              },
+              {
+                "nodeType": "text",
+                "value": " developed on React SSR Architecture and runs Github Actions pipeline whenever new build push on github. This action gets lighthouse score of current build and commit as gist. Below svg rendered from the same gist. ",
+                "marks": [],
+                "data": {}
+              },
+              {
+                "nodeType": "hyperlink",
+                "data": {
+                  "uri": "https://googlechrome.github.io/lighthouse/viewer/?gist=0201643f7451d5738d6a11df71f5178f"
+                },
+                "content": [
+                  {
+                    "nodeType": "text",
+                    "value": "Full lighthouse report link",
+                    "marks": [],
+                    "data": {}
+                  }
+                ]
+              },
+              {
+                "nodeType": "text",
+                "value": "",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          },
+          {
+            "nodeType": "embedded-entry-block",
+            "data": {
+              "target": {
+                "url": "https://gist.githubusercontent.com/codebysandip/af99ad0db9523ac85e7f12b2c4d3c4d1/raw/51a8e57fb92f2c5272769ecccc288975899aba90/pagespeed.svg",
+                "title": "Lighthouse Score ",
+                "width": "100%",
+                "style": {
+                  "paddingTop": "20px"
+                },
+                "sysId": "externalImage"
+              }
+            },
+            "content": []
+          },
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          }
+        ]
+      },
+      "sysId": "introWithCtaBanner"
+    },
+    {
+      "title": "Motive",
+      "intro": {
+        "nodeType": "document",
+        "data": {},
+        "content": [
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "Motive of this Architecture is to provide a architecture where developers can start            coding from day 1. Without worrying of base architecture, performance and customisation. ",
+                "marks": [],
+                "data": {}
+              },
+              {
+                "nodeType": "text",
+                "value": "Used core modules to develop this architecture. It means you will never be in a situation of not supporting things as most libraries fails when we get complex requirements from clients. As we all know libraries export config but what will happen if our requirement is unique and that requirement is not supported by library config and we already developed most of the project using library then we can say what a waste.",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          }
+        ]
+      },
+      "sysId": "introWithCtaBanner"
+    },
+    {
+      "title": "CI Pipeline",
+      "intro": {
+        "nodeType": "document",
+        "data": {},
+        "content": [
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "React SSR Architecture have inbuilt pre configuration of CI. Pipeline will run:",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          },
+          {
+            "nodeType": "ordered-list",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "list-item",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Runs Cypress and Jest test",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "list-item",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Uploads code coverage to ",
+                        "marks": [],
+                        "data": {}
+                      },
+                      {
+                        "nodeType": "hyperlink",
+                        "data": {
+                          "uri": "https://about.codecov.io/"
+                        },
+                        "content": [
+                          {
+                            "nodeType": "text",
+                            "value": "codecov",
+                            "marks": [],
+                            "data": {}
+                          }
+                        ]
+                      },
+                      {
+                        "nodeType": "text",
+                        "value": ". Codecov is a online coverage tool which compares code coverage to previous code coverage. Fails build if code coverage goes down.",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "list-item",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Build app in Production Mode",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "nodeType": "list-item",
+                "data": {},
+                "content": [
+                  {
+                    "nodeType": "paragraph",
+                    "data": {},
+                    "content": [
+                      {
+                        "nodeType": "text",
+                        "value": "Runs lighthouse score test and checks scores to meet minimum set threshold. This ensures your new feature is not degrading performance",
+                        "marks": [],
+                        "data": {}
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "nodeType": "paragraph",
+            "data": {},
+            "content": [
+              {
+                "nodeType": "text",
+                "value": "",
+                "marks": [],
+                "data": {}
+              }
+            ]
+          }
+        ]
+      },
+      "sysId": "introWithCtaBanner"
+    },
+    {
+      "title": "Out of Box Features",
+      "features": [
+        {
+          "title": "Built on Typescript",
+          "description": "Typescript prevents lots of errors while development. TS also known for better maintainability of code.",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/icons8-typescript_qoiaub.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/icons8-typescript_qoiaub.svg",
+            "title": "Typescript icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "PWA Ready",
+          "description": "PWA ready with 100% lighthouse score",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/pwa-icon_yxieym.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/pwa-icon_yxieym.svg",
+            "title": "PWA icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Green Lighthouse Score",
+          "description": "Green Lighthouse score for best user experience",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666007297/react-ssr-docs/google-lighthouse-icon-may-2019-_ax6lim.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666007297/react-ssr-docs/google-lighthouse-icon-may-2019-_ax6lim.svg",
+            "title": "Google Lighthouse icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Compression of Response",
+          "description": "Inbuilt support of compress of HTMl, CSS and Javascript response",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666007519/react-ssr-docs/compress_vyjkoj.png",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666007519/react-ssr-docs/compress_vyjkoj.png",
+            "title": "Compress Icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Caching",
+          "description": "Support of caching of static pages to serve faster. Caching also reduces load of server",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/cache-including-redis_eg0jne.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/cache-including-redis_eg0jne.svg",
+            "title": "Caching Icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Unit and E2E Test",
+          "description": "Cypress and Jest pre configured with 95+% code coverage",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/bugs-search-svgrepo-com_ejyx3l.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/bugs-search-svgrepo-com_ejyx3l.svg",
+            "title": "Bug Search Icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Proxy For API",
+          "description": "Inbuilt support of proxy of API to solve CORS issue in development as well as                 production",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/proxy-svgrepo-com_oak0i2.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/proxy-svgrepo-com_oak0i2.svg",
+            "title": "API Proxy",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "HttpClient Service",
+          "description": "HttClient with feature like retry request, sending Auth header, regenerate token from refresh token and many more",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666010610/react-ssr-docs/api-svgrepo-com_pkkcc8.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666010610/react-ssr-docs/api-svgrepo-com_pkkcc8.svg",
+            "title": "API icon",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Local API Server",
+          "description": "Local API server to ease life of frontend developers to develop features before API develop.",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666010610/react-ssr-docs/api-svgrepo-com_pkkcc8.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666010610/react-ssr-docs/api-svgrepo-com_pkkcc8.svg",
+            "title": "Local API Server",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        },
+        {
+          "title": "Many more",
+          "description": "React SSR out of box provide more than 50 features to reduce initial development time",
+          "icon": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/more-svgrepo-com_z7wfrz.svg",
+          "image": {
+            "url": "https://res.cloudinary.com/sandipj/image/upload/v1666003031/react-ssr-docs/more-svgrepo-com_z7wfrz.svg",
+            "title": "Many More ",
+            "width": "36px",
+            "sysId": "externalImage"
+          },
+          "sysId": "featureCardComponent"
+        }
+      ],
+      "sysId": "featuresBanner"
+    }
+  ],
+  "sysId": "contentPage",
+  "lastUpdated": "2022-10-17T14:51:42.774Z"
+}

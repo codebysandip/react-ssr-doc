@@ -67,11 +67,8 @@ const InViewComp = (props: InViewProps & WithContextProps) => {
               }
             });
           } else {
-            console.error(
-              "When inView true then returned component should be lazy loaded via import syntax only",
-            );
             setInView(true);
-            setSkeleton({ default: null });
+            setLazyComp({ default: compOrLazyComp as React.FC });
           }
         }
       },
@@ -112,7 +109,7 @@ export interface InViewProps extends IntersectionObserverInit {
    * InView will first resolve loadData then will render component
    * Resolved data from loadData will send as props in lazy loaded component
    */
-  children: (inView: boolean) => React.ReactNode | Promise<LazyComp>;
+  children: (inView: boolean) => React.ReactNode | Promise<LazyComp> | React.FC<any>;
   /**
    * extra props is the props your component will need when loads
    */
@@ -124,6 +121,6 @@ export interface InViewProps extends IntersectionObserverInit {
  * Lazy Comp
  */
 export interface LazyComp {
-  default: React.ComponentType<Record<string, any>> | React.FunctionComponent<any>;
+  default: React.ComponentType<any> | React.FC<any>;
   loadData?: (ctx: ContextDataWithStore) => Promise<Record<string, any>>;
 }

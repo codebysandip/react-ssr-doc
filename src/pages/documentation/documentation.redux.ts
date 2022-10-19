@@ -1,9 +1,9 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { setDocHeader } from "src/app.redux.js";
+import { setDocHeader, setPageType } from "src/app.redux.js";
 import { GetState, ThunkApi } from "src/core/models/common.model.js";
 import { AppDispatch } from "src/redux/create-store.js";
 import { createSlice } from "src/redux/redux.imports.js";
-import { DocPageData } from "./doc-page.model.js";
+import { DocPageData } from "./documentation.model.js";
 
 export interface DocPageState {
   pageData: DocPageData | null;
@@ -24,6 +24,7 @@ export const fetchDocPageData = (pageId: string) => {
           lastUpdated: apiResponse.data.lastUpdated,
         }),
       );
+      dispatch(setPageType("DOC_PAGE"));
     }
     return apiResponse;
   };

@@ -1,11 +1,13 @@
-export interface LeftSideMenuLink {
+export type PageType = "DOC_PAGE" | "CONTENT_PAGE" | "EXTERNAL_PAGE";
+
+export interface NavigationLink {
   text: string;
   url: string;
-  links?: LeftSideMenuLink[];
-  pageType: string;
+  links?: NavigationLink[];
+  pageType: PageType;
 }
 
 export interface LeftSideMenu {
-  links: LeftSideMenuLink[];
+  links: NavigationLink[];
   title: string;
 }

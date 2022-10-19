@@ -32,8 +32,12 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
   }
 
   render() {
+    const { docHeader, tagLines, pageType } = this.props;
     return (
-      <header id="header" className="header">
+      <header
+        data-test-id="header"
+        className={`header ${pageType === "CONTENT_PAGE" ? "text-center" : ""}`}
+      >
         <div className="container">
           <div className="branding">
             <h1 className="logo">
@@ -45,16 +49,32 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
             </h1>
           </div>
 
-          {this.props.docHeader && (
+          {pageType === "DOC_PAGE" && (
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
                 <Link to="/">Home</Link>
               </li>
-              <li className="breadcrumb-item active">{this.props.docHeader?.title}</li>
+              <li className="breadcrumb-item active">{docHeader?.title}</li>
             </ol>
           )}
 
-          <div className="top-search-box">
+          {pageType === "CONTENT_PAGE" && (
+            <div className="tagline">
+              {tagLines.map((tagLine, idx) => (
+                <p key={idx} data-test-id={`tag-line-${tagLine}`}>
+                  {tagLine}
+                </p>
+              ))}
+            </div>
+          )}
+
+          <div
+            className={
+              pageType === "DOC_PAGE"
+                ? "top-search-box"
+                : "main-search-box pt-3 pb-4 d-inline-block"
+            }
+          >
             <form className="form-inline search-form justify-content-center" action="" method="get">
               <input
                 type="text"
@@ -102,8 +122,9 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
 const mapStateToProps = (state: RootState) => {
   return {
     isLoggedIn: state.auth.isLoggedIn,
-    header: state.app.header,
     docHeader: state.app.docHeader,
+    tagLines: state.app.tagLines,
+    pageType: state.app.pageType,
   };
 };
 

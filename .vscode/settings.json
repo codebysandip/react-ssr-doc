@@ -16,11 +16,13 @@
     "contentful",
     "formik",
     "glyphicon",
+    "INLINES",
     "invisibles",
     "kebabize",
     "lcov",
     "maxlength",
     "mddir",
+    "middlewares",
     "pagespeed",
     "pmmmwh",
     "precache",
@@ -42,7 +44,23 @@
   "[html]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
-  "cSpell.enableFiletypes": ["!json", "!yaml"],
-  "css.lint.validProperties": ["speak"],
-  "scss.lint.validProperties": ["speak"]
+  "cSpell.enableFiletypes": [
+    "!json",
+    "!yaml"
+  ],
+  "css.lint.validProperties": [
+    "speak"
+  ],
+  "scss.lint.validProperties": [
+    "speak"
+  ],
+  "[scss]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  }
 }

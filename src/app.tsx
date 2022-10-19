@@ -10,13 +10,15 @@ import { DocHeader } from "./core/components/app/doc-header/doc-header.comp.js";
 import { Footer } from "./core/components/app/footer/footer.comp.js";
 import LazyRoute from "./core/components/lazy-route/lazy-route.component.js";
 import { Toaster } from "./core/components/toaster/toaster.comp.js";
-import { useAppDispatch } from "./core/hook.js";
+import { useAppDispatch, useAppSelector } from "./core/hook.js";
 import { CompModule } from "./core/models/route.model.js";
 import { Routes as PageRoutes } from "./routes.js";
 
 export function App(props: AppProps) {
   const dispatch = useAppDispatch();
   const location = useLocation();
+  const pageType = useAppSelector((state) => state.app.pageType);
+
   const checkHeader = () => {
     let isHeaderVisible = true;
     for (const path of NO_HEADER_PATHS) {
@@ -30,14 +32,12 @@ export function App(props: AppProps) {
   const [showHeader, setShowHeader] = useState(checkHeader());
 
   useEffect(() => {
-    if (location.key === "default") {
-      return;
-    }
     const isHeaderVisible = checkHeader();
     if (isHeaderVisible !== showHeader) {
       setShowHeader(isHeaderVisible);
     }
-    dispatch(setDocHeader(undefined));
+    pageType !== "DOC_PAGE" && dispatch(setDocHeader(undefined));
+    window.scrollTo({ top: 0 });
   }, [location.pathname]);
 
   useEffect(() => {
@@ -69,16 +69,16 @@ export function App(props: AppProps) {
   return (
     <div className="page-wrapper">
       {/* Use SsrHead component to set common Head tags */}
-      <SsrHead />
+      {process.env.IS_SERVER && <SsrHead />}
       {/* Header and footer should not visible on error page if header/footer is dynamic.
       Why? because may be error page coming because of Header/Footer api */}
       {showHeader && <Header />}
-      <div className="doc-wrapper">
+      <div className={pageType === "DOC_PAGE" ? "doc-wrapper" : "cards-section text-center"}>
         <div className="container">
-          <DocHeader />
+          {pageType === "DOC_PAGE" && <DocHeader />}
 
-          <div className="doc-body row">
-            <div className="doc-content col-lg-10 col-md-9 col-12 order-1">
+          <div className={pageType === "DOC_PAGE" ? "doc-body row" : ""}>
+            <div className={pageType === "DOC_PAGE" ? "doc-content col-md-9 col-12 order-1" : ""}>
               <div className="content-inner">
                 <Routes>
                   {PageRoutes.map((r, idx) => {
@@ -99,7 +99,7 @@ export function App(props: AppProps) {
                 </Routes>
               </div>
             </div>
-            {showHeader && <LeftSideMenu />}
+            {pageType === "DOC_PAGE" && <LeftSideMenu />}
           </div>
         </div>
       </div>

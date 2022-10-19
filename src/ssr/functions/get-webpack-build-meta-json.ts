@@ -25,8 +25,4 @@ export function getWebpackBuildMetaJson(): MetaJson {
   }
 }
 
-export interface MetaJson {
-  mainJs: string;
-  mainStyle: string;
-  chunkCss: Record<string, string>;
-}
+export type MetaJson = Record<string, string>;

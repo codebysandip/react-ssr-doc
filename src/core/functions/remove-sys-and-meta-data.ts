@@ -2,7 +2,13 @@ export const removeSysAndMetaData = (entry: Record<string, any>) => {
   if (typeof entry === "object") {
     Object.keys(entry).forEach((key) => {
       if (key === "sys" || key === "metadata") {
-        delete entry[key];
+        if (key === "sys") {
+          if (entry["fields"] && entry[key].contentType?.sys.id) {
+            entry["fields"].sysId = entry[key].contentType.sys.id;
+          }
+        } else {
+          delete entry[key];
+        }
         return;
       }
       if (Array.isArray(entry[key])) {

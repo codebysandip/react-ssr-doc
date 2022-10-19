@@ -11,10 +11,20 @@ export interface GetState {
 
 export type ThunkApi = typeof HttpClient;
 
-export type GetInitialProps = (
-  ctx: ContextData,
-) => Promise<ApiResponse<any> | IRedirect> | IRedirect;
+export type PromiseApiResponseWithRedirect = Promise<
+  ApiResponse<any> | IRedirect | ApiResponse<any>[]
+>;
+export type GetInitialPropsReturnBase =
+  | PromiseApiResponseWithRedirect
+  | PromiseApiResponseWithRedirect[];
+/**
+ * type of getInitialProps
+ */
+export type GetInitialProps = (ctx: ContextData) => GetInitialPropsReturnBase | IRedirect;
 
+/**
+ * type of getInitialProps when redux used
+ */
 export type GetInitialPropsWithStore = (
   ctx: ContextDataWithStore,
-) => Promise<ApiResponse<any> | IRedirect> | IRedirect;
+) => GetInitialPropsReturnBase | IRedirect;

@@ -1,4 +1,4 @@
-import { Component } from "react";
+import { Component, ReactElement } from "react";
 import { renderToString } from "react-dom/server";
 import { Helmet } from "react-helmet";
 import { StaticRouter } from "react-router-dom/server.js";
@@ -27,17 +27,22 @@ export class HtmlTemplate extends Component<HtmlTemplateProps> {
         <head>
           <link rel="shortcut icon" href="/favicon.ico" />
           <link href="/manifest.json" rel="manifest" />
-          <link href={metaJson.mainStyle} rel="stylesheet" />
-          {helmet.style.toComponent()}
           {helmet.title.toComponent()}
-          {helmet.link.toComponent()}
           {helmet.meta.toComponent()}
+          {(helmet.link.toComponent() as unknown as ReactElement[]).filter((el) => {
+            return el.props.rel === "preload";
+          })}
+          <link href={metaJson["style.css"]} rel="stylesheet" />
+          {(helmet.link.toComponent() as unknown as ReactElement[]).filter((el) => {
+            return el.props.rel !== "preload";
+          })}
+          {helmet.style.toComponent()}
         </head>
         <body {...helmetBody}>
           {helmet.noscript.toComponent()}
           <div id="root" dangerouslySetInnerHTML={{ __html: this.props.html }}></div>
           <script dangerouslySetInnerHTML={{ __html: ssrDataScript }}></script>
-          <script src={metaJson.mainJs}></script>
+          <script src={metaJson["client.js"]}></script>
           {helmet.script.toComponent()}
         </body>
       </html>

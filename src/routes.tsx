@@ -9,16 +9,8 @@ import { IRoute } from "./core/models/route.model.js";
 export const Routes: IRoute[] = [
   {
     path: "/",
-    component: () => import(/* webpackChunkName: "home" */ "../examples/home/home.component.js"),
+    component: () => import(/* webpackChunkName: "content-page" */ "pages/content/content.page.js"),
     isSSR: true,
-  },
-  {
-    path: "/product/detail/:id",
-    component: () =>
-      import(
-        /* webpackChunkName: "product-detail" */ "../examples/home/product-detail/product-detail.comp.js"
-      ),
-    isSSR: false,
   },
   {
     path: ROUTE_LOGIN,
@@ -41,7 +33,7 @@ export const Routes: IRoute[] = [
   {
     path: "/doc/:pageId",
     component: () =>
-      import(/* webpackChunkName: "doc-page" */ "src/pages/doc-page/doc-page.comp.js"),
+      import(/* webpackChunkName: "doc-page" */ "src/pages/documentation/documentation.page.js"),
     isSSR: true,
   },
 ];

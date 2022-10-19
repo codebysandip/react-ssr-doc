@@ -1,12 +1,9 @@
-import React from "react";
-import { ContextData } from "src/core/models/context.model.js";
-import { IRedirect, PageData } from "src/core/models/page-data.js";
-import { ApiResponse } from "core/services/http-client.js";
-import NodeCache from "node-cache";
-import { RootState } from "src/redux/create-store.js";
-import { SHOW_LOADER } from "core/services/http-client.js";
-import { Toaster } from "src/core/models/toaster.model.js";
 import { GetInitialProps } from "core/models/common.model.js";
+import { ApiResponse, SHOW_LOADER } from "core/services/http-client.js";
+import NodeCache from "node-cache";
+import React from "react";
+import { PageData } from "src/core/models/page-data.js";
+import { Toaster } from "src/core/models/toaster.model.js";
 import { MetaJson } from "src/ssr/functions/get-webpack-build-meta-json.js";
 
 declare global {

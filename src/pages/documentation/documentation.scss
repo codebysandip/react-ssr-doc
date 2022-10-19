@@ -1,0 +1,19 @@
+@import "/src/assets/scss/doc";
+@import "/node_modules/prismjs/themes/prism-okaidia.css";
+
+.rich-text {
+  code {
+    white-space: pre !important;
+    width: 100%;
+    padding: 1rem !important;
+    &.inline-code {
+      background: #dfe6ef !important;
+      color: #000000 !important;
+      padding: 0 10px !important;
+    }
+  }
+
+  img {
+    margin-bottom: 1rem;
+  }
+}

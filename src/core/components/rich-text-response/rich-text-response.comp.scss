@@ -2,6 +2,9 @@
   height: 24px;
   padding: 2px;
   display: block;
+  position: absolute;
+  right: 16px;
+  margin-top: 5px;
 }
 
 .hide {
@@ -14,4 +17,8 @@
 
 code {
   word-break: break-word !important;
+}
+
+.code-block {
+  // height: calc(100vh - (100vh * 40 / 100));
 }

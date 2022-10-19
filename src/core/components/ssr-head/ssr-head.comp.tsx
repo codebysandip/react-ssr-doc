@@ -22,7 +22,7 @@ export function SsrHead() {
   return (
     <Helmet>
       <title>React SSR Architecture Documentation</title>
-      <script>{`${serviceWorker}`}</script>
+      {process.env.ENV === "production" && <script>{`${serviceWorker}`}</script>}
       <meta
         name="description"
         content="Open Source React SSR High Performance Architecture.
@@ -39,6 +39,7 @@ export function SsrHead() {
         content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=5"
       />
       <link href={spinner} rel="preload" as="image" />
+      <link href={metaJson["ElegantIcons.woff"]} rel="preload" as="font" />
       <link rel="apple-touch-icon" href="/assets/icons/ios/192.png" />
       <link
         href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"

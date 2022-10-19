@@ -20,6 +20,7 @@ app.use(etagMiddleware);
 // this should be first route always
 // this route will try to get json from mocks folder otherwise will send request to other routes
 app.get("/*", (req, res, next) => {
+  console.log("api request!!", req.url);
   const sendResponse = () => {
     const data = JSON.parse(readFileSync(jsonPath, { encoding: "utf-8" }));
     res.json(data);

@@ -11,19 +11,19 @@ import zlib from "zlib";
  * @param contentType content type of response
  */
 export function sendResponse(
-  response: string | Buffer,
+  response: string | Buffer | Record<string, any>,
   res: Response,
   req: Request,
-  contentType = "text/html",
 ) {
+  res.set("Content-Type", typeof response === "object" ? "application/json" : "text/html");
   if (IS_DEV || IS_CYPRESS) {
     res.send(response);
     return;
   }
+  const input = typeof response === "object" ? JSON.stringify(response) : response;
   const acceptEncoding = req.headers["accept-encoding"] as string;
-  res.set("Content-Type", contentType);
   if (/\bbr\b/.test(acceptEncoding)) {
-    zlib.brotliCompress(response, (err: any, buffer) => {
+    zlib.brotliCompress(input, (err: any, buffer) => {
       if (err) {
         res.send(response);
         return;
@@ -32,7 +32,7 @@ export function sendResponse(
       res.send(buffer);
     });
   } else if (/\bdeflate\b/.test(acceptEncoding)) {
-    zlib.deflate(response, (err: any, buffer) => {
+    zlib.deflate(input, (err: any, buffer) => {
       if (err) {
         res.send(response);
         return;
@@ -41,7 +41,7 @@ export function sendResponse(
       res.send(buffer);
     });
   } else if (/\bgzip\b/.test(acceptEncoding)) {
-    zlib.gzip(response, (err: any, buffer) => {
+    zlib.gzip(input, (err: any, buffer) => {
       if (err) {
         res.send(response);
         return;

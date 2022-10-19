@@ -1,7 +1,10 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GetState, ThunkApi } from "core/models/common.model.js";
-import { LeftSideMenu } from "src/core/components/app/left-side-menu/left-side-menu.model.js";
-import { HeaderData } from "./app.model.js";
+import {
+  LeftSideMenu,
+  PageType,
+} from "src/core/components/app/left-side-menu/left-side-menu.model.js";
+import { Footer } from "./app.model.js";
 import { AppDispatch } from "./redux/create-store.js";
 import { createSlice } from "./redux/redux.imports.js";
 
@@ -9,16 +12,18 @@ export interface DocHeader {
   title: string;
   lastUpdated: string;
 }
+
 export interface AppState {
-  header: HeaderData;
   docHeader?: DocHeader;
   sideMenu?: LeftSideMenu;
+  tagLines: string[];
+  pageType: PageType;
+  footer?: Footer;
 }
 
 const initialState: AppState = {
-  header: {
-    links: [],
-  },
+  tagLines: [],
+  pageType: "CONTENT_PAGE",
 };
 
 export const searchText = (searchText: string) => {
@@ -32,8 +37,17 @@ export const searchText = (searchText: string) => {
 
 export const fetchSideMenu = () => {
   return async (dispatch: AppDispatch, _getState: GetState, api: ThunkApi) => {
-    return api.get("/api/cms/sideMenu").then((apiResponse) => {
+    return api.get<LeftSideMenu>("/api/cms/sideMenu").then((apiResponse) => {
       dispatch(fetchSideMenuSuccess(apiResponse.data));
+      return apiResponse;
+    });
+  };
+};
+
+export const fetchFooter = () => {
+  return async (dispatch: AppDispatch, _getState: GetState, api: ThunkApi) => {
+    return api.get<Footer>("/api/cms/footer").then((apiResponse) => {
+      dispatch(fetchFooterSuccess(apiResponse.data));
       return apiResponse;
     });
   };
@@ -43,17 +57,24 @@ const appSlice = createSlice({
   name: "app",
   initialState,
   reducers: {
-    fetchHeaderSuccess: (state, action: PayloadAction<HeaderData>) => {
-      state.header = action.payload;
-    },
     setDocHeader: (state, action: PayloadAction<DocHeader | undefined>) => {
       state.docHeader = action.payload;
     },
-    fetchSideMenuSuccess: (state, action) => {
-      state.sideMenu = action.payload;
+    fetchSideMenuSuccess: (state, action: PayloadAction<LeftSideMenu | null>) => {
+      state.sideMenu = action.payload || undefined;
+    },
+    setTagLines: (state, action: PayloadAction<string[]>) => {
+      state.tagLines = action.payload;
+    },
+    setPageType: (state, action: PayloadAction<PageType>) => {
+      state.pageType = action.payload;
+    },
+    fetchFooterSuccess: (state, action: PayloadAction<Footer | null>) => {
+      state.footer = action.payload || undefined;
     },
   },
 });
 
-export const { fetchHeaderSuccess, setDocHeader, fetchSideMenuSuccess } = appSlice.actions;
+export const { setDocHeader, fetchSideMenuSuccess, setTagLines, setPageType, fetchFooterSuccess } =
+  appSlice.actions;
 export default appSlice.reducer;
