@@ -1,20 +1,8 @@
 import { AxiosError, AxiosResponse } from "axios";
-import {
-  COOKIE_ACCESS_TOKEN,
-  COOKIE_REFRESH_TOKEN,
-  INTERNET_NOT_AVAILABLE,
-  URL_REFRESH_TOKEN,
-} from "src/const.js";
-import { AuthResponse } from "src/pages/auth/auth.model.js";
+import { COOKIE_ACCESS_TOKEN, INTERNET_NOT_AVAILABLE } from "src/const.js";
 import { CommonService } from "../services/common.service.js";
 import { CookieService } from "../services/cookie.service.js";
-import {
-  ApiResponse,
-  getDefaultApiResponseObj,
-  HttpClient,
-  HttpClientOptions,
-} from "../services/http-client.js";
-import { setAccessAndRefreshToken } from "./get-token.js";
+import { HttpClient } from "../services/http-client.js";
 
 export function getAxiosResponseFromResponse(response: AxiosResponse<any> | AxiosError<any>) {
   let resp: AxiosResponse | undefined;
@@ -104,29 +92,6 @@ export function configureHttpClient() {
   };
 
   HttpClient.internetNotAvailableMsg = INTERNET_NOT_AVAILABLE;
-
-  HttpClient.handleRefreshTokenFlow = (options: HttpClientOptions) => {
-    CookieService.delete(COOKIE_ACCESS_TOKEN, options.nodeRespObj);
-    const refreshToken = CookieService.get(COOKIE_REFRESH_TOKEN, options.nodeReqObj);
-    const apiResponse = getDefaultApiResponseObj();
-    if (!refreshToken) {
-      apiResponse.status = 401;
-      apiResponse.message = ["Refresh Token not available"];
-      return Promise.resolve(apiResponse);
-    }
-    return HttpClient.post<AuthResponse>(URL_REFRESH_TOKEN, { refreshToken }).then((resp) => {
-      if (!resp.isError && resp.data) {
-        setAccessAndRefreshToken(resp as ApiResponse<AuthResponse>, options.nodeRespObj);
-        return HttpClient.sendRequest(options.url || "/", options.method || "GET", options);
-      }
-      CookieService.delete(COOKIE_REFRESH_TOKEN, options.nodeRespObj);
-      // if unable to generate token from refresh token then mark request as 401 unAuthorized
-      apiResponse.status = 401;
-      apiResponse.isError = true;
-      apiResponse.message = resp.message;
-      return apiResponse;
-    });
-  };
 
   HttpClient.setUrl = (url) => {
     return `${process.env.IS_SERVER ? `http://localhost:${process.env.PORT || 5000}` : ""}${url}`;

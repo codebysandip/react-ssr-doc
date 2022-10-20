@@ -7,7 +7,6 @@ import {
   Store,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
-import AuthReducer from "pages/auth/auth.redux";
 import { ThunkMiddleware } from "redux-thunk";
 import AppReducer from "src/app.redux.js";
 import { HttpClient } from "src/core/services/http-client.js";
@@ -15,7 +14,6 @@ import { combineReducers, configureStore } from "./redux.imports.js";
 import { RootState as RootStateType } from "./root-state.js";
 
 const reducer = {
-  auth: AuthReducer,
   app: AppReducer,
 };
 /**

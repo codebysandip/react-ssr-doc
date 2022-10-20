@@ -26,7 +26,7 @@
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
     "verify": "ts-node-esm ./scripts/verify.ts",
-    "cypress:run": "npx cypress run --e2e && npx cypress run --component",
+    "cypress:run": "npx cypress run --e2e --record --key 9253d648-02b0-41f5-924b-e9fa86ad6df2 && npx cypress run --component --record --key 9253d648-02b0-41f5-924b-e9fa86ad6df2",
     "cypress:open": "npx cypress open -b chrome",
     "cypress:open:comp": "npm run cypress:open -- --component",
     "cypress:open:e2e": "npm run cypress:open -- --e2e"

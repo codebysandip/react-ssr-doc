@@ -1,29 +1,14 @@
-import { logout as logoutAction } from "pages/auth/auth.redux.js";
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { searchText } from "src/app.redux.js";
-import { ROUTE_LOGIN } from "src/const.js";
 import { withRouter, WithRouterProps } from "src/core/hoc/with-routes.hoc.js";
-import { CommonService } from "src/core/services/common.service.js";
 import { AppDispatch, RootState } from "src/redux/create-store.js";
 
 class HeaderComp extends Component<HeaderProps, HeaderState> {
   public readonly state: Readonly<HeaderState> = {
     searchText: "",
   };
-
-  public logout() {
-    this.props.logout();
-    CommonService.logout();
-    this.props.router.navigate(ROUTE_LOGIN);
-  }
-
-  public componentDidUpdate(prevProps: HeaderProps) {
-    if (prevProps.isLoggedIn !== this.props.isLoggedIn && !this.props.isLoggedIn) {
-      this.props.router.navigate(ROUTE_LOGIN);
-    }
-  }
 
   public search() {
     if (this.state.searchText.length >= 3) {
@@ -107,7 +92,6 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
 
 const mapStateToProps = (state: RootState) => {
   return {
-    isLoggedIn: state.auth.isLoggedIn,
     docHeader: state.app.docHeader,
     tagLines: state.app.tagLines,
     pageType: state.app.pageType,
@@ -116,7 +100,6 @@ const mapStateToProps = (state: RootState) => {
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
-    logout: () => dispatch(logoutAction()),
     search: (q: string) => dispatch(searchText(q)),
   };
 };

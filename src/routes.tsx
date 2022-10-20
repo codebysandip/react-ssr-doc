@@ -1,4 +1,4 @@
-import { ROUTE_404, ROUTE_500, ROUTE_LOGIN } from "./const.js";
+import { ROUTE_404, ROUTE_500 } from "./const.js";
 import { IRoute } from "./core/models/route.model.js";
 
 /**
@@ -11,11 +11,6 @@ export const Routes: IRoute[] = [
     path: "/",
     component: () => import(/* webpackChunkName: "content-page" */ "pages/content/content.page.js"),
     isSSR: true,
-  },
-  {
-    path: ROUTE_LOGIN,
-    component: () => import(/* webpackChunkName: "login" */ "pages/auth/login/login.comp.js"),
-    isSSR: false,
   },
   // Replace 404 component code with own code
   {

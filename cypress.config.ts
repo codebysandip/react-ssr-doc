@@ -2,6 +2,7 @@ import { devServer } from "@cypress/webpack-dev-server";
 import { defineConfig } from "cypress";
 import { createRequire } from "module";
 import webpackDevConfig from "./config/webpack.dev.js";
+
 const require = createRequire(import.meta.url);
 const webpackPreprocessor = require("@cypress/webpack-preprocessor");
 const defaults = webpackPreprocessor.defaultOptions;
@@ -19,6 +20,7 @@ const getConfig = () => {
 const PORT = parseInt(process.env.PORT || "5000");
 const baseUrl = `http://localhost:${PORT}`;
 export default defineConfig({
+  projectId: "xsmiw5",
   e2e: {
     baseUrl,
     video: false,

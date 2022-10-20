@@ -3,13 +3,11 @@ import { createStore, replaceReducer } from "src/redux/create-store";
 import { fetchFooter, fetchSideMenu } from "./app.redux.js";
 import { PAGE_INVALID_RETURN_DATA, ROUTE_403, ROUTE_404, ROUTE_500, ROUTE_LOGIN } from "./const.js";
 import { getRoute } from "./core/functions/get-route.js";
-import { getAccessTokenData } from "./core/functions/get-token.js";
 import { ContextDataWithStore } from "./core/models/context-with-store.model.js";
 import { ContextData } from "./core/models/context.model.js";
 import { CompModule } from "./core/models/route.model.js";
 import { SSRConfig } from "./core/models/ssr-config.model.js";
 import { CommonService } from "./core/services/common.service.js";
-import { loginSuccess, logout } from "./pages/auth/auth.redux.js";
 
 export const ssrConfig: SSRConfig = {
   configureStore: (module: CompModule, ctx: ContextData) => {
@@ -21,17 +19,8 @@ export const ssrConfig: SSRConfig = {
     if (moduleObj.reducer && (ctx as any).store) {
       replaceReducer((ctx as any).store, moduleObj.reducer);
     }
-
-    const accessTokenData = getAccessTokenData(ctx.req);
     const store = (ctx as ContextDataWithStore).store;
-    if (accessTokenData) {
-      store.dispatch(
-        loginSuccess({
-          isLoggedIn: true,
-          user: accessTokenData,
-        }),
-      );
-    }
+
     const route = getRoute(ctx.location.pathname);
     const promiseArr: Promise<ApiResponse<any>>[] = [];
     // Route.isSSR will false then server will not send page data and header data

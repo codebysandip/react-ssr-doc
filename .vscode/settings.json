@@ -32,7 +32,8 @@
     "Sandip",
     "smarttv",
     "SSRDATA",
-    "toastify"
+    "toastify",
+    "xsmiw"
   ],
   "jestrunner.jestCommand": "npm run jest:test",
   "[typescript]": {
