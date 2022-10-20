@@ -1,0 +1,45 @@
+{
+  "links": [
+    {
+      "text": "Getting Started",
+      "url": "/doc/getting-started",
+      "pageType": "DOC_PAGE",
+      "sysId": "navigation"
+    },
+    {
+      "text": "Basics of React SSR",
+      "url": "#",
+      "links": [
+        {
+          "text": "How To Add Page/Route",
+          "url": "/doc/how-to-add-page",
+          "pageType": "DOC_PAGE",
+          "sysId": "navigation"
+        },
+        {
+          "text": "How To Make API call",
+          "url": "/doc/how-to-make-api-call",
+          "pageType": "DOC_PAGE",
+          "sysId": "navigation"
+        },
+        {
+          "text": "How To Create Redux Components",
+          "url": "/doc/how-to-create-redux-components",
+          "pageType": "DOC_PAGE",
+          "sysId": "navigation"
+        },
+        {
+          "text": "getInitialProps & ContextData",
+          "url": "/doc/get-initial-props-and-context-data",
+          "pageType": "DOC_PAGE",
+          "sysId": "navigation"
+        }
+      ],
+      "pageType": "DOC_PAGE",
+      "sysId": "navigation"
+    }
+  ],
+  "title": "Documentation",
+  "sysId": "sideMenu",
+  "lastUpdated": "2022-10-12T04:21:23.064Z"
+}

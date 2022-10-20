@@ -23,13 +23,9 @@
 @import "/node_modules/bootstrap/scss/navbar";
 @import "/node_modules/bootstrap/scss/transitions";
 
-@import "./plugins/elegant-font/style.css";
-
 //*************************** Theme Styles ****************************/ // Import theme styles
 @import "mixins";
 @import "base";
-// @import "doc";
-// @import "landing";
 
 body {
   font-size: 1rem;

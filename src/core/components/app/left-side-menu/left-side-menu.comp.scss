@@ -25,5 +25,23 @@
         font-weight: 700;
       }
     }
+
+    &.has-submenu {
+      .nav-link {
+        .icon {
+          width: 20px;
+          height: 20px;
+          // &.right {
+          mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
+          -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
+          // }
+
+          &.down {
+            mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
+            -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
+          }
+        }
+      }
+    }
   }
 }

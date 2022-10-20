@@ -46,6 +46,15 @@
     svg {
       width: 14px;
     }
+
+    .icon {
+      mask: url(/node_modules/@icon/elegant-icons/icons/icon_search-2.svg);
+      -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/icon_clock_alt.svg);
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+      margin-bottom: 3px;
+    }
   }
 }
 

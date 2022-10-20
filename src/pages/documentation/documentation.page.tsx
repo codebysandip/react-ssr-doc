@@ -11,7 +11,7 @@ import "./documentation.scss";
 function DocPage(props: DocPageProps) {
   const navigate = useNavigate();
   return (
-    <div className="doc-body row">
+    <div className="doc-body row" data-test-id={"documentation-page"}>
       <div className="doc-content col-md-9 col-12 order-1">
         <div className="content-inner">
           {" "}
@@ -37,6 +37,7 @@ function DocPage(props: DocPageProps) {
                 className="btn btn-link"
                 nodeAfterText={<i className="arrow_carrot-right"></i>}
                 text="Next"
+                data-test-id={"next-link"}
               ></NavLink>
             )}
           </div>

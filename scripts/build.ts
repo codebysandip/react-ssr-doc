@@ -79,7 +79,7 @@ app.use(
   WebpackDevMiddleware(compiler, {
     publicPath: webpackClientConfig.output.publicPath,
     serverSideRender: true,
-    writeToDisk: false,
+    writeToDisk: true,
   }),
 );
 

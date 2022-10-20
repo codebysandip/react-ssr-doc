@@ -247,6 +247,13 @@ select {
     a {
       text-decoration: none;
     }
+
+    .icon {
+      mask: url(@icon/elegant-icons/icons/icon_documents_alt.svg) no-repeat;
+      -webkit-mask: url(@icon/elegant-icons/icons/icon_documents_alt.svg) 36px;
+      width: 32px;
+      height: 32px;
+    }
   }
   .text-highlight {
     color: $color-primary;
@@ -273,27 +280,37 @@ select {
     font-weight: 800;
     color: #fff;
   }
-  .icon {
-    font-size: 24px;
-    color: $color-primary;
-    .body-green & {
-      color: $color-green;
-    }
-    .body-blue & {
-      color: $color-blue;
-    }
-    .body-orange & {
-      color: $color-orange;
-    }
-    .body-red & {
-      color: $color-red;
-    }
-    .body-pink & {
-      color: $color-pink;
-    }
-    .body-purple & {
-      color: $color-purple;
-    }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  mask-position: center !important;
+  -webkit-mask-position: center !important;
+  mask-size: contain !important;
+  -webkit-mask-size: contain !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-repeat: no-repeat !important;
+
+  font-size: 24px;
+  background-color: $color-primary;
+  .body-green & {
+    background-color: $color-green;
+  }
+  .body-blue & {
+    background-color: $color-blue;
+  }
+  .body-orange & {
+    background-color: $color-orange;
+  }
+  .body-red & {
+    background-color: $color-red;
+  }
+  .body-pink & {
+    background-color: $color-pink;
+  }
+  .body-purple & {
+    background-color: $color-purple;
   }
 }
 
@@ -343,6 +360,12 @@ select {
     &:hover {
       outline: none !important;
       color: darken($text-color, 10%);
+    }
+    .icon {
+      mask: url(/node_modules/@icon/elegant-icons/icons/icon_search-2.svg);
+      -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/icon_search-2.svg);
+      width: 20px;
+      height: 20px;
     }
   }
 }

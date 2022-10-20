@@ -1,0 +1,7 @@
+{
+  "data-test-id snippet": {
+    "prefix": "dti",
+    "description": "Snippet for data test id",
+    "body": "data-test-id={$1}"
+  }
+}

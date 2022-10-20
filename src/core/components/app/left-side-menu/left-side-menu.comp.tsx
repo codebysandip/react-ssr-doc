@@ -14,11 +14,17 @@ export function LeftSideMenuComp(props: LeftSideMenuProps) {
     return links.map((link, idx) => {
       if (link.links) {
         return (
-          <li className="nav-item has-submenu" onClick={(event) => toggleMenu(event)} key={idx}>
+          <li
+            className="nav-item has-submenu"
+            onClick={(event) => toggleMenu(event)}
+            key={idx}
+            data-test-id={`nested-menu-${link.text}`}
+          >
             <NavLink
               className="nav-link d-flex justify-content-between align-baseline"
               link={link}
-              nodeAfterText={<i className="arrow_carrot-right"></i>}
+              nodeAfterText={<span className="icon"></span>}
+              data-test-id={`link-${link.text}`}
             />
             <ul className="submenu collapse">{renderNestedMenu(link.links)}</ul>
           </li>
@@ -26,7 +32,7 @@ export function LeftSideMenuComp(props: LeftSideMenuProps) {
       }
       return (
         <li className={`nav-item ${link.url === location.pathname ? "active" : ""}`} key={idx}>
-          <NavLink className={`nav-link`} link={link} />
+          <NavLink className={`nav-link`} link={link} data-test-id={`link-${link.text}`} />
         </li>
       );
     });
@@ -36,25 +42,27 @@ export function LeftSideMenuComp(props: LeftSideMenuProps) {
     if (menuRef.current) {
       const activeNavItems = menuRef.current.querySelectorAll(".nav-item.active");
       activeNavItems.forEach((navItem) => {
-        (navItem.parentElement as HTMLUListElement).classList.toggle("show");
+        const parent = navItem.parentElement as HTMLUListElement;
+        if (!parent.classList.contains("submenu")) {
+          return;
+        }
+        parent.classList.toggle("show");
+        (parent.parentElement as HTMLUListElement)
+          .querySelector("span.icon")
+          ?.classList.toggle("down");
       });
     }
   }, [location.pathname]);
 
   const toggleMenu = (event: React.MouseEvent<HTMLLIElement>) => {
     event.currentTarget.querySelector("ul")?.classList.toggle("show");
-    if (event.currentTarget.querySelector("ul")?.classList.contains("show")) {
-      event.currentTarget
-        .querySelector("i")
-        ?.classList.replace("arrow_carrot-right", "arrow_carrot-down");
-    } else {
-      event.currentTarget
-        .querySelector("i")
-        ?.classList.replace("arrow_carrot-down", "arrow_carrot-right");
-    }
+    event.currentTarget.querySelector("span.icon")?.classList.toggle("down");
   };
   return (
-    <div className="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+    <div
+      className="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex"
+      data-test-id={"side-menu"}
+    >
       <div id="doc-nav" className="doc-nav">
         <nav className="sidebar card py-2 mb-4">
           <ul className="nav flex-column" id="nav_accordion" ref={menuRef}>
