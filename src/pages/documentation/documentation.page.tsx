@@ -17,7 +17,7 @@ function DocPage(props: DocPageProps) {
           {" "}
           {process.env.IS_SERVER && (
             <Helmet>
-              {/* {process.env.IS_SERVER && <link href={metaJson.chunkCss["doc-page"]} rel="stylesheet" />} */}
+              <link href={metaJson["doc-page"]} rel="stylesheet" />
               <title>{props.pageData?.seo.title}</title>
               <meta name="description" content={props.pageData?.seo.description} />
             </Helmet>

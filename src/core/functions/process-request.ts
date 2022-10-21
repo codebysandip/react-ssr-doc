@@ -21,10 +21,8 @@ import { PreInitialProps } from "../models/ssr-config.model.js";
  */
 export function processRequest(module: CompModule, ctx: ContextData, isFirstRendering: boolean) {
   return new Promise<ProcessRequestResult>((resolve) => {
-    if (process.env.IS_SERVER) {
-      if (ssrConfig.configureStore) {
-        ssrConfig.configureStore(module, ctx);
-      }
+    if (process.env.IS_SERVER && ssrConfig.configureStore) {
+      ssrConfig.configureStore(module, ctx);
     }
     const Component = module.default;
     if (!Component) {

@@ -30,7 +30,6 @@ export function CodeBlock(props: CodeBlockProps) {
                   btn.textContent = "Copied";
                   setTimeout(() => {
                     btn.textContent = "Copy";
-                    // btn.classList.toggle("hide");
                   }, 2000);
                 })
                 .catch(() => {
@@ -45,12 +44,6 @@ export function CodeBlock(props: CodeBlockProps) {
       <code
         dangerouslySetInnerHTML={{ __html: code }}
         className={`language-typescript ${displayStyle === "inline" ? "inline-code" : ""}`}
-        // onMouseOver={(event) => {
-        //   const copyBtn = event.currentTarget.previousSibling as HTMLButtonElement;
-        //   if (copyBtn) {
-        //     copyBtn.classList.toggle("hide");
-        //   }
-        // }}
       ></code>
     </span>
   );

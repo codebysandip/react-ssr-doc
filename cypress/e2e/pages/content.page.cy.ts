@@ -15,9 +15,7 @@ describe("Content Page", () => {
   it("Should render exact components coming from CMS", () => {
     cy.visit("/");
     HomeData.components.forEach((comp) => {
-      if (comp.sysId === "introWithCtaBanner") {
-        cy.dataCy(`${comp.sysId}-${comp.title}`).should("exist");
-      } else if (comp.sysId === "featuresBanner") {
+      if (comp.sysId === "introWithCtaBanner" || comp.sysId === "featuresBanner") {
         cy.dataCy(`${comp.sysId}-${comp.title}`).should("exist");
       }
     });
