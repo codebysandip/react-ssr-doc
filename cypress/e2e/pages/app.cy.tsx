@@ -93,7 +93,7 @@ describe("App shell", () => {
   });
 
   it("Should render footer links", () => {
-    cy.visit("/");
+    cy.visit("/?cypress=true");
     cy.dataCy("footer").within(() => {
       FooterData.linkGroups.forEach((lg) => {
         cy.dataCy(`${lg.sysId}-${lg.title}`).within(() => {
