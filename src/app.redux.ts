@@ -60,7 +60,7 @@ const appSlice = createSlice({
     setDocHeader: (state, action: PayloadAction<DocHeader | undefined>) => {
       state.docHeader = action.payload;
     },
-    fetchSideMenuSuccess: (state, action: PayloadAction<LeftSideMenu | null>) => {
+    fetchSideMenuSuccess: (state, action: PayloadAction<LeftSideMenu | undefined>) => {
       state.sideMenu = action.payload || undefined;
     },
     setTagLines: (state, action: PayloadAction<string[]>) => {
@@ -69,7 +69,7 @@ const appSlice = createSlice({
     setPageType: (state, action: PayloadAction<PageType>) => {
       state.pageType = action.payload;
     },
-    fetchFooterSuccess: (state, action: PayloadAction<Footer | null>) => {
+    fetchFooterSuccess: (state, action: PayloadAction<Footer | undefined>) => {
       state.footer = action.payload || undefined;
     },
   },

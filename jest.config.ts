@@ -7,12 +7,18 @@ import type { Config } from "jest";
 import { pathsToModuleNameMapper } from "ts-jest";
 import tsconfigJson from "./tsconfig.json";
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const collectCoverageOnlyFrom = require("./include-files-in-jest-exclude-from-cypress.cjs");
+
 const jestConfig: Config = {
   // Automatically clear mock calls, instances, contexts and results before every test
   clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
   collectCoverage: true,
+  collectCoverageOnlyFrom: {
+    ...collectCoverageOnlyFrom,
+  },
 
   // The directory where Jest should output its coverage files
   coverageDirectory: "coverage/jest",

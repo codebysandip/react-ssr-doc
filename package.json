@@ -29,7 +29,11 @@
     "cypress:run": "npx cypress run --e2e --record --key 9253d648-02b0-41f5-924b-e9fa86ad6df2 && npx cypress run --component --record --key 9253d648-02b0-41f5-924b-e9fa86ad6df2",
     "cypress:open": "npx cypress open -b chrome",
     "cypress:open:comp": "npm run cypress:open -- --component",
-    "cypress:open:e2e": "npm run cypress:open -- --e2e"
+    "cypress:open:e2e": "npm run cypress:open -- --e2e",
+    "copy:reports": "mkdir -p reports && cp coverage/cypress/coverage-final.json reports/from-cypress.json && cp coverage/jest/coverage-final.json reports/from-jest.json",
+    "merge:reports": "nyc merge reports && mv coverage.json .nyc_output/out.json",
+    "gen:reports": "nyc report --reporter=html --reporter=json --report-dir=reports",
+    "combine:reports": "npm run copy:reports && npm run merge:reports && npm run gen:reports"
   },
   "author": "Sandip",
   "license": "ISC",
@@ -144,24 +148,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "nyc": {
-    "all": true,
-    "report-dir": "coverage/cypress",
-    "reporter": [
-      "lcov",
-      "json",
-      "html"
-    ],
-    "include": [
-      "src/**/*.ts",
-      "src/**/*.tsx"
-    ],
-    "exclude": [
-      "cypress",
-      "src/**/*.model.ts"
-    ],
-    "excludeAfterRemap": true
-  },
   "engines": {
     "node": "16.x"
   }

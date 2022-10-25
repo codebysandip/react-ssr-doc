@@ -44,7 +44,6 @@ export const ssrConfig: SSRConfig = {
     }
     if (response.status === 401 || response.status === 403) {
       if (response.status === 401) {
-        (ctx as ContextDataWithStore).store.dispatch(logout());
         CommonService.logout(ctx.res);
         return { path: ROUTE_LOGIN };
       } else {

@@ -58,10 +58,13 @@ export const processRequest = () => {
          */
         const sendHtml = (url: string, pageData?: PageData, isError = false) => {
           // redirect to error path in case of error
+          /* istanbul ignore if */
           if (isError) {
             resp.redirect(url);
             return;
           }
+
+          /* istanbul ignore if */
           if (!pageData) {
             pageData = {};
           }

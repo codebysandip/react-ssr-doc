@@ -2,7 +2,6 @@ import { FormGroup } from "core/components/form/FormGroup.js";
 import { Form, Formik } from "formik";
 import { PASSWORD_REGEX } from "src/const.js";
 import { FormValidation } from "src/core/services/form-validation.service.js";
-import "src/style.scss";
 import * as Yup from "yup";
 
 describe("Form Group", () => {
