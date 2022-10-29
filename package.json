@@ -33,7 +33,8 @@
     "copy:reports": "mkdir -p reports && cp coverage/cypress/coverage-final.json reports/from-cypress.json && cp coverage/jest/coverage-final.json reports/from-jest.json",
     "merge:reports": "nyc merge reports && mv coverage.json .nyc_output/out.json",
     "gen:reports": "nyc report --reporter=html --reporter=json --report-dir=reports",
-    "combine:reports": "npm run copy:reports && npm run merge:reports && npm run gen:reports"
+    "combine:reports": "npm run copy:reports && npm run merge:reports && npm run gen:reports",
+    "preinstall": "npm i -g pm2 && pm2 install pm2-logrotate"
   },
   "author": "Sandip",
   "license": "ISC",
