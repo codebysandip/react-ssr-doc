@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { useLocation } from "react-router";
+import { useAppSelector } from "src/core/hook.js";
 import { RootState } from "src/redux/create-store.js";
 import { NavLink } from "../../nav-link/nav-link.comp.js";
 import "./left-side-menu.comp.scss";
@@ -9,6 +10,7 @@ import { NavigationLink } from "./left-side-menu.model.js";
 export function LeftSideMenuComp(props: LeftSideMenuProps) {
   const location = useLocation();
   const menuRef = useRef<HTMLUListElement>(null);
+  const sideMenuActive = useAppSelector((state) => state.app.sideMenuActive);
 
   const renderNestedMenu = (links: NavigationLink[]) => {
     return links.map((link, idx) => {
@@ -60,7 +62,7 @@ export function LeftSideMenuComp(props: LeftSideMenuProps) {
   };
   return (
     <div
-      className="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex"
+      className={`doc-sidebar col-md-3 col-12 order-0 d-md-flex ${sideMenuActive && "active"}`}
       data-test-id={"side-menu"}
     >
       <div id="doc-nav" className="doc-nav">

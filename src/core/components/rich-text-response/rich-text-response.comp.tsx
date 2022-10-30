@@ -3,11 +3,15 @@ import { Block, BLOCKS, Document, Inline, INLINES } from "@contentful/rich-text-
 import { Image } from "core/components/image/image.comp.js";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Device } from "src/app.redux.js";
+import { useAppSelector } from "src/core/hook.js";
 import { InView } from "../in-view/in-view.comp.js";
 import { NavLink } from "../nav-link/nav-link.comp.js";
 import { CodeBlock } from "./code-block.comp.js";
 import { GithubCode } from "./github-code.comp.js";
 import "./rich-text-response.comp.scss";
+
+let device: Device = "desktop";
 
 const renderOptions: Options = {
   renderNode: {
@@ -79,8 +83,8 @@ const renderOptions: Options = {
       return (
         <Image
           src={`https://${node.data.target.file.url}`}
-          height={node.data.target.file.details.image.height}
-          width={node.data.target.file.details.image.width}
+          height={device === "desktop" ? node.data.target.file.details.image.height : "100%"}
+          width={device === "desktop" ? node.data.target.file.details.image.width : "100%"}
           alt={node.data.target.description}
         />
       );
@@ -112,6 +116,7 @@ const renderOptions: Options = {
 };
 
 export function RichTextResponse(props: RichTextResponseProps) {
+  device = useAppSelector((state) => state.app.device);
   const { richTextResponse } = props;
   return <>{documentToReactComponents(richTextResponse, renderOptions)}</>;
 }

@@ -1,44 +1,58 @@
-.sidebar {
-  li .submenu {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    padding-left: 1rem;
-    padding-right: 1rem;
+.doc-sidebar {
+  display: none;
+  &.active {
+    display: block !important;
+    z-index: 99;
+    position: fixed;
+    top: 0;
+    background: white;
+    min-height: 100vh;
+    width: 78%;
+    padding-top: 2rem;
   }
 
-  .nav-link {
-    font-size: 1rem;
-    align-items: baseline;
-
-    &:hover {
-      text-decoration: none;
+  .sidebar {
+    li .submenu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
-    i {
-      font-size: 1.5rem;
-    }
-  }
 
-  .nav-item {
-    &.active {
-      a.nav-link {
-        font-weight: 700;
+    .nav-link {
+      font-size: 1rem;
+      align-items: baseline;
+
+      &:hover {
+        text-decoration: none;
+      }
+      i {
+        font-size: 1.5rem;
       }
     }
 
-    &.has-submenu {
-      .nav-link {
-        .icon {
-          width: 20px;
-          height: 20px;
-          // &.right {
-          mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
-          -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
-          // }
+    .nav-item {
+      &.active {
+        a.nav-link {
+          font-weight: 700;
+        }
+      }
 
-          &.down {
-            mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
-            -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
+      &.has-submenu {
+        .nav-link {
+          .icon {
+            width: 20px;
+            height: 20px;
+            // &.right {
+            mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
+            -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-right.svg);
+            // }
+
+            &.down {
+              mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
+              -webkit-mask: url(/node_modules/@icon/elegant-icons/icons/arrow_carrot-down.svg);
+            }
           }
         }
       }

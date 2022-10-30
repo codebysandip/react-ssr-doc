@@ -11,10 +11,15 @@
     a {
       color: #fff;
     }
+    .container {
+      justify-content: center;
+      flex-direction: column;
+    }
   }
   .branding {
     text-transform: uppercase;
-    margin-bottom: 20px;
+    justify-content: center;
+
     .logo {
       font-size: 38px;
       margin-top: 0;

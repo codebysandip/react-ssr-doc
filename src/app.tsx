@@ -67,7 +67,7 @@ export function App(props: AppProps) {
   }, []);
 
   return (
-    <div className="page-wrapper">
+    <div className={`page-wrapper ${pageType === "CONTENT_PAGE" && "landing-page"}`}>
       {/* Use SsrHead component to set common Head tags */}
       {process.env.IS_SERVER && <SsrHead />}
       {/* Header and footer should not visible on error page if header/footer is dynamic.

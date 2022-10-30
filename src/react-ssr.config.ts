@@ -1,6 +1,7 @@
 import { ApiResponse } from "core/services/http-client.js";
 import { createStore, replaceReducer } from "src/redux/create-store";
-import { fetchFooter, fetchSideMenu } from "./app.redux.js";
+import { UAParser } from "ua-parser-js";
+import { Device, fetchFooter, fetchSideMenu, setDevice } from "./app.redux.js";
 import { PAGE_INVALID_RETURN_DATA, ROUTE_403, ROUTE_404, ROUTE_500, ROUTE_LOGIN } from "./const.js";
 import { getRoute } from "./core/functions/get-route.js";
 import { ContextDataWithStore } from "./core/models/context-with-store.model.js";
@@ -12,6 +13,11 @@ import { CommonService } from "./core/services/common.service.js";
 export const ssrConfig: SSRConfig = {
   configureStore: (module: CompModule, ctx: ContextData) => {
     const store = createStore(module.reducer);
+    if (process.env.IS_SERVER) {
+      const agent = new UAParser(ctx.req?.headers["user-agent"]);
+      const deviceType = agent.getDevice().type;
+      store.dispatch(setDevice(deviceType as Device));
+    }
     (ctx as ContextDataWithStore).store = store;
   },
   preInitialProps: (ctx: ContextData, moduleObj, isFirstRendering) => {

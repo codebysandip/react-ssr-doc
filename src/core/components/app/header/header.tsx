@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { searchText } from "src/app.redux.js";
+import { searchText, toggleSideMenuActive } from "src/app.redux.js";
 import { withRouter, WithRouterProps } from "src/core/hoc/with-routes.hoc.js";
 import { AppDispatch, RootState } from "src/redux/create-store.js";
 
@@ -16,25 +16,35 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
     }
   }
 
+  public toggleSideMenu() {
+    this.props.toggleSideMenu();
+  }
+
   render() {
-    const { docHeader, tagLines, pageType } = this.props;
+    const { docHeader, tagLines, pageType, device, sideMenuActive } = this.props;
     return (
       <header
         data-test-id="header"
-        className={`header ${pageType === "CONTENT_PAGE" ? "text-center" : ""}`}
+        className={`header ${
+          pageType === "CONTENT_PAGE" || device === "mobile" ? "text-center" : ""
+        }`}
       >
+        <div className="branding">
+          <h1 className="logo">
+            <Link to="/">
+              <span className="icon"></span>
+              <span className="text-highlight">React SSR</span>
+              <span className="text-bold">Docs</span>
+            </Link>
+          </h1>
+          {pageType === "DOC_PAGE" && (
+            <span
+              className={`d-md-none hamburger-menu ${sideMenuActive && "active"}`}
+              onClick={() => this.toggleSideMenu()}
+            ></span>
+          )}
+        </div>
         <div className="container">
-          <div className="branding">
-            <h1 className="logo">
-              <Link to="/">
-                {/* <span aria-hidden="true" className="icon_documents_alt icon"></span> */}
-                <span className="icon"></span>
-                <span className="text-highlight">React SSR</span>
-                <span className="text-bold">Docs</span>
-              </Link>
-            </h1>
-          </div>
-
           {pageType === "DOC_PAGE" && (
             <ol className="breadcrumb">
               <li className="breadcrumb-item">
@@ -55,11 +65,7 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
           )}
 
           <div
-            className={
-              pageType === "DOC_PAGE"
-                ? "top-search-box"
-                : "main-search-box pt-3 pb-4 d-inline-block"
-            }
+            className={pageType === "DOC_PAGE" ? "" : "main-search-box pt-3 pb-4 d-inline-block"}
           >
             <form className="form-inline search-form justify-content-center" action="" method="get">
               <input
@@ -95,12 +101,15 @@ const mapStateToProps = (state: RootState) => {
     docHeader: state.app.docHeader,
     tagLines: state.app.tagLines,
     pageType: state.app.pageType,
+    device: state.app.device,
+    sideMenuActive: state.app.sideMenuActive,
   };
 };
 
 const mapDispatchToProps = (dispatch: AppDispatch) => {
   return {
     search: (q: string) => dispatch(searchText(q)),
+    toggleSideMenu: () => dispatch(toggleSideMenuActive()),
   };
 };
 

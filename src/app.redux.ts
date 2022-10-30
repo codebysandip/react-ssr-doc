@@ -13,17 +13,22 @@ export interface DocHeader {
   lastUpdated: string;
 }
 
+export type Device = "mobile" | "desktop" | "tablet";
 export interface AppState {
   docHeader?: DocHeader;
   sideMenu?: LeftSideMenu;
   tagLines: string[];
   pageType: PageType;
   footer?: Footer;
+  device: Device;
+  sideMenuActive: boolean;
 }
 
 const initialState: AppState = {
   tagLines: [],
   pageType: "CONTENT_PAGE",
+  device: "desktop",
+  sideMenuActive: false,
 };
 
 export const searchText = (searchText: string) => {
@@ -72,9 +77,22 @@ const appSlice = createSlice({
     fetchFooterSuccess: (state, action: PayloadAction<Footer | undefined>) => {
       state.footer = action.payload || undefined;
     },
+    setDevice: (state, action: PayloadAction<Device>) => {
+      state.device = action.payload;
+    },
+    toggleSideMenuActive: (state) => {
+      state.sideMenuActive = !state.sideMenuActive;
+    },
   },
 });
 
-export const { setDocHeader, fetchSideMenuSuccess, setTagLines, setPageType, fetchFooterSuccess } =
-  appSlice.actions;
+export const {
+  setDocHeader,
+  fetchSideMenuSuccess,
+  setTagLines,
+  setPageType,
+  fetchFooterSuccess,
+  setDevice,
+  toggleSideMenuActive,
+} = appSlice.actions;
 export default appSlice.reducer;

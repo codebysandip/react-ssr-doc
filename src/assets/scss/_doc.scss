@@ -1,6 +1,12 @@
 @import "/src/assets/scss/variables";
 @import "/src/assets/scss/mixins";
 
+.header {
+  .container {
+    justify-content: space-between;
+    flex-direction: row;
+  }
+}
 /* ======= Doc Styling ======= */
 .doc-wrapper {
   padding: 45px 0;
@@ -658,6 +664,17 @@
 
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
+  .header {
+    .branding {
+      display: flex;
+      justify-content: space-between;
+    }
+    .container {
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
   .jumbotron {
     padding: 30px 15px;
     h1 {

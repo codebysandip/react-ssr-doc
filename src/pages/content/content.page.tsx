@@ -22,7 +22,6 @@ class ContentPage extends Component<ContentPageProps, ContentPageState> {
       <div data-test-id="content-page">
         {process.env.IS_SERVER && (
           <Helmet>
-            <body className="body-orange landing-page" />
             <style>{pageData?.styles?.join(" ") || ""}</style>
             <link href={metaJson["content-page.css"]} rel="stylesheet" />
           </Helmet>
