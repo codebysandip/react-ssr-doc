@@ -105,4 +105,18 @@ describe("App shell", () => {
       });
     });
   });
+
+  it("Should show hamburger menu icon on doc page when mobile browser", () => {
+    cy.viewport("iphone-xr");
+    cy.visit("/doc/getting-started");
+    cy.dataCy("hamburger-menu").should("exist");
+    cy.dataCy("side-menu").should("not.be.visible");
+  });
+
+  it("Should show hamburger menu on doc page when click on hamburger icon", () => {
+    cy.viewport("iphone-xr");
+    cy.visit("/doc/getting-started");
+    cy.dataCy("hamburger-menu").click();
+    cy.dataCy("side-menu").should("be.visible");
+  });
 });

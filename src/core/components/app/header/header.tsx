@@ -41,6 +41,7 @@ class HeaderComp extends Component<HeaderProps, HeaderState> {
             <span
               className={`d-md-none hamburger-menu ${sideMenuActive && "active"}`}
               onClick={() => this.toggleSideMenu()}
+              data-test-id="hamburger-menu"
             ></span>
           )}
         </div>
