@@ -77,6 +77,14 @@ export default function (env, args, isProd = false) {
       definePluginObj[`process.env.${key}`] = JSON.stringify(env[key]);
     }
   });
+
+  // get all env which starts from REACT_ from process.env and add in definePluginObj
+  Object.keys(process.env).forEach(key => {
+    if (key.startsWith("REACT_")) {
+      definePluginObj[`process.env.${key}`] = JSON.stringify(process.env[key]);
+    }
+  });
+
   const miniCssFileName = !(isLocal || isCypress)
     ? "assets/css/style.[contenthash].css"
     : "assets/css/style.css";
@@ -94,7 +102,9 @@ export default function (env, args, isProd = false) {
       filename: miniCssFileName,
       chunkFilename: miniCssChunkName,
     }),
-    new Dotenv(),
+    new Dotenv({
+      path: `env/.env.${env.ENV}`,
+    }),
     new webpack.NormalModuleReplacementPlugin(/.js$/, (resource) => {
       if (resource.context.indexOf("node_modules") !== -1) {
         return;
@@ -121,6 +131,10 @@ export default function (env, args, isProd = false) {
 
   if (isServer) {
     plugins.push(new CleanWebpackPlugin());
+    plugins.push(new Dotenv({
+      path: `env-server/.env.${env.ENV}`,
+      defaults: true
+    }));
   } else {
     plugins.push(
       new webpack.ProvidePlugin({
@@ -168,9 +182,8 @@ export default function (env, args, isProd = false) {
     entry,
     output: {
       filename: `[name]${!(isLocal || isCypress) && !isServer ? ".[contenthash]" : ""}.js`,
-      chunkFilename: `[name]${
-        !(isLocal || isCypress) && !isServer ? ".[contenthash]" : ""
-      }.chunk.js`,
+      chunkFilename: `[name]${!(isLocal || isCypress) && !isServer ? ".[contenthash]" : ""
+        }.chunk.js`,
       path: outFolder,
       publicPath: "/",
       chunkFormat: isServer ? "module" : "array-push",
@@ -193,13 +206,13 @@ export default function (env, args, isProd = false) {
     target: isServer ? "node" : "web",
     externals: isServer
       ? [
-          nodeExternals({
-            importType: function (moduleName) {
-              return moduleName;
-            },
-          }),
-          "react-helmet",
-        ]
+        nodeExternals({
+          importType: function (moduleName) {
+            return moduleName;
+          },
+        }),
+        "react-helmet",
+      ]
       : [],
     externalsPresets: { node: isServer },
     module: {
@@ -244,13 +257,13 @@ export default function (env, args, isProd = false) {
           use: isServer
             ? ["ignore-loader"]
             : [
-                // Creates `style` nodes from JS strings
-                MiniCssExtractPlugin.loader,
-                // Translates CSS into CommonJS
-                "css-loader",
-                // Compiles Sass to CSS
-                "sass-loader",
-              ],
+              // Creates `style` nodes from JS strings
+              MiniCssExtractPlugin.loader,
+              // Translates CSS into CommonJS
+              "css-loader",
+              // Compiles Sass to CSS
+              "sass-loader",
+            ],
         },
         {
           test: /\.(png|jpe?g|gif|svg|woff2?)$/i,

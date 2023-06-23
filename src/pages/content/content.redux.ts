@@ -29,8 +29,8 @@ export default contentSlice.reducer;
 export const fetchContentPageData = (pageId: string) => {
   return async (dispatch: AppDispatch, _getState: GetState, api: ThunkApi) => {
     const apiResponse = await api.get<ContentPageData>(`/api/cms/${pageId}?pageType=CONTENT_PAGE`);
-    dispatch(contentPageDataLoaded(apiResponse.data));
-    if (!apiResponse.isError && apiResponse.data) {
+    dispatch(contentPageDataLoaded(apiResponse.data || null));
+    if (apiResponse.isSuccess && apiResponse.data) {
       dispatch(setTagLines(apiResponse.data.tagLines));
       dispatch(setPageType("CONTENT_PAGE"));
     } else {

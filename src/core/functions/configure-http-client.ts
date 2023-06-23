@@ -73,7 +73,7 @@ export function configureHttpClient() {
   };
 
   HttpClient.onResponse = (apiResponse, options) => {
-    if (apiResponse.isError && apiResponse.message.length && options.showNotificationMessage) {
+    if (!apiResponse.isSuccess && apiResponse.message.length && options.showNotificationMessage) {
       CommonService.toast({
         type: "error",
         message: apiResponse.message[0],

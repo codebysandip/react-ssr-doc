@@ -6,8 +6,8 @@ import { sendResponse } from "../functions/send-response.js";
 const contentful = ((contentfulRaw as any).default ?? contentfulRaw) as typeof contentfulRaw;
 
 const contentfulClient = contentful.createClient({
-  space: process.env.CONTENTFUL_SPACE_ID,
-  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+  space: process.env.REACT_CONTENTFUL_SPACE_ID,
+  accessToken: process.env.REACT_CONTENTFUL_ACCESS_TOKEN,
   timeout: 5000,
 });
 

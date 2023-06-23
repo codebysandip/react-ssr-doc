@@ -6,7 +6,7 @@ import { isServerFn } from "./functions/helper-functions.js";
 import commonConfig from "./webpack.common.js";
 
 /**
- * Dev config for webpack. This build should not use for production.
+ * Dev config for webpack. This config should not use for production.
  * It's for local development only
  * @param {[key:string]: string} env environment key value pair provided when running webpack command
  * @param {*} args args
