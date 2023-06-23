@@ -22,11 +22,11 @@ jobs:
 
       - name: Get build version
         id: vars
-        run: echo short_hash=$(echo ${GITHUB_SHA::8})
+        run: echo short_hash=$(echo ${GITHUB_SHA::8}) >> $GITHUB_OUTPUT
 
       - name: Get latest commit timestamp
         id: commit_epoch
-        run: echo epoch=$(echo $(git show -s --format=%ct))
+        run: echo epoch=$(echo $(git show -s --format=%ct))  >> $GITHUB_OUTPUT
 
       - name: Build and push
         id: docker_build
