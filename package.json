@@ -16,10 +16,8 @@
     "build:client:prod": "npx webpack --config ./config/webpack.prod.js --env IS_LOCAL=false --env IS_SERVER=false --env ENV=production",
     "build:server:prod": "npx webpack --config ./config/webpack.prod.js --env IS_LOCAL=false --env IS_SERVER=true --env ENV=production",
     "build:prod": "npm run build:server:prod && npm run build:client:prod",
-    "build": "cross-env WITH_API=true npm run build:prod",
     "build:prod:action": "cross-env GITHUB_ACTION=true npm run build:prod",
-    "pm2:prod": "pm2 start ecosystem.config.cjs --env production --only React-SSR",
-    "pm2:prod:heroku": "pm2 start ecosystem.config.cjs --env production --only 'React-SSR,Test-API'",
+    "pm2:start": "pm2-runtime start ecosystem.config.cjs --env production --only React-SSR",
     "test": "npx ts-node-esm scripts/test-run.ts",
     "jest:test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "prepare": "husky install",
@@ -34,7 +32,9 @@
     "merge:reports": "nyc merge reports && mv coverage.json .nyc_output/out.json",
     "gen:reports": "nyc report --reporter=html --reporter=json --report-dir=reports",
     "combine:reports": "npm run copy:reports && npm run merge:reports && npm run gen:reports",
-    "preinstall": "npm i -g pm2 && pm2 install pm2-logrotate"
+    "docker:build:prod": "docker build --rm -t sandipj/react-ssr-doc . --build-arg env=prod",
+    "docker:run": "docker run --name react-srr-doc -d -p 6500:5000 sandipj/react-ssr-doc -it --rm",
+    "docker:prod": "npm run docker:build:prod && docker rm --force sandipj/react-ssr-doc && npm run docker:run"
   },
   "author": "Sandip",
   "license": "ISC",

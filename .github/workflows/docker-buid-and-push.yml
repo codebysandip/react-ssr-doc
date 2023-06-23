@@ -1,0 +1,39 @@
+name: Docker build & push
+
+on:
+  push:
+    branches:
+    `- "main"
+jobs:
+  build:
+    timeout-minutes: 20
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+
+        name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Get build version
+        id: vars
+        run: echo short_hash=$(echo ${GITHUB_SHA::8})
+
+      - name: Get latest commit timestamp
+        id: commit_epoch
+        run: echo epoch=$(echo $(git show -s --format=%ct))
+
+      - name: Build and push
+        id: docker_build
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          context: ${{ github.workspace }}
+          tags: sandipj/react-ssr-doc:prod-${{steps.vars.outputs.short_hash}}-${{steps.commit_epoch.outputs.epoch}}
+          build-args: |
+            env=prod
