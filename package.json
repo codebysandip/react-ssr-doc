@@ -32,7 +32,7 @@
     "merge:reports": "nyc merge reports && mv coverage.json .nyc_output/out.json",
     "gen:reports": "nyc report --reporter=html --reporter=json --report-dir=reports",
     "combine:reports": "npm run copy:reports && npm run merge:reports && npm run gen:reports",
-    "docker:build:prod": "docker build --rm -t sandipj/react-ssr-doc . --build-arg env=prod",
+    "docker:build:prod": "docker build --rm -t sandipj/react-ssr-doc . --build-arg env=prod --build-arg  REACT_CONTENTFUL_SPACE_ID= --build-arg REACT_CONTENTFUL_ACCESS_TOKEN=",
     "docker:run": "docker run --name react-srr-doc -d -p 6500:5000 sandipj/react-ssr-doc -it --rm",
     "docker:prod": "npm run docker:build:prod && docker rm --force sandipj/react-ssr-doc && npm run docker:run"
   },

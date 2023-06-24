@@ -7,4 +7,4 @@ reports
 lighthouse/pagespeed.svg
 lighthouse/report.json
 .env
-env-server
+env-server/.env*

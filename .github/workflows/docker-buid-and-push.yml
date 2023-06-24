@@ -37,3 +37,5 @@ jobs:
           tags: sandipj/react-ssr-doc:prod-${{steps.vars.outputs.short_hash}}-${{steps.commit_epoch.outputs.epoch}}
           build-args: |
             env=prod
+            REACT_CONTENTFUL_ACCESS_TOKEN=${{ secrets.REACT_CONTENTFUL_ACCESS_TOKEN}}
+            REACT_CONTENTFUL_SPACE_ID=${{secrets.REACT_CONTENTFUL_SPACE_ID}}
