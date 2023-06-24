@@ -20,7 +20,6 @@
     "pm2:start": "pm2-runtime start ecosystem.config.cjs --env production --only React-SSR",
     "test": "npx ts-node-esm scripts/test-run.ts",
     "jest:test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
-    "prepare": "husky install",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,ts,tsx}\" --fix",
     "verify": "ts-node-esm ./scripts/verify.ts",

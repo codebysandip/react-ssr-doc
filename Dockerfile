@@ -9,7 +9,10 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build:${env}
+CMD ["rm", "-rf", "node_modules"]
+RUN npm ci --only=prod
 RUN npm install pm2 -g
+
 
 FROM build as final
 WORKDIR /app
