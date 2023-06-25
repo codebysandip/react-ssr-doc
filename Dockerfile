@@ -9,8 +9,8 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npm run build:${env}
-CMD ["rm", "-rf", "node_modules"]
-RUN npm ci --only=prod
+RUN rm -rf node_modules src cypress test-api
+RUN npm ci --omit=dev
 RUN npm install pm2 -g
 
 

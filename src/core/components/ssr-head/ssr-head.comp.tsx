@@ -26,7 +26,7 @@ export function SsrHead() {
       <meta
         name="description"
         content="Open Source React SSR High Performance Architecture.
-      Goal of this architecture to save month of initial phase development"
+      Goal of this architecture to save initial phase development"
       />
       <meta
         name="keywords"
