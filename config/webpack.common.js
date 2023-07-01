@@ -132,7 +132,7 @@ export default function (env, args, isProd = false) {
   if (isServer) {
     plugins.push(new CleanWebpackPlugin());
     plugins.push(new Dotenv({
-      path: `env-server/.env.${env.ENV}`,
+      path: join(process.cwd(), "..", `docker-pull-auto-gd/env/react-ssr-doc/${env.ENV.env}`),
       defaults: true
     }));
   } else {

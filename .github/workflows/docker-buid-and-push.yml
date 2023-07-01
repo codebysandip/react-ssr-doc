@@ -11,8 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-        with:
-          token: ${{ secrets.PAT }}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v2
@@ -37,5 +35,3 @@ jobs:
           tags: sandipj/react-ssr-doc:prod-${{steps.vars.outputs.short_hash}}-${{steps.commit_epoch.outputs.epoch}}
           build-args: |
             env=prod
-            REACT_CONTENTFUL_ACCESS_TOKEN=${{ secrets.REACT_CONTENTFUL_ACCESS_TOKEN}}
-            REACT_CONTENTFUL_SPACE_ID=${{secrets.REACT_CONTENTFUL_SPACE_ID}}
