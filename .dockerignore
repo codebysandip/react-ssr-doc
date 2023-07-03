@@ -6,3 +6,7 @@
 /build
 /coverage
 /test-api
+/cypress
+/test-api
+/lighthouse
+/mocks

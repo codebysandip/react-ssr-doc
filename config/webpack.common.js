@@ -79,11 +79,11 @@ export default function (env, args, isProd = false) {
   });
 
   // get all env which starts from REACT_ from process.env and add in definePluginObj
-  Object.keys(process.env).forEach(key => {
-    if (key.startsWith("REACT_")) {
-      definePluginObj[`process.env.${key}`] = JSON.stringify(process.env[key]);
-    }
-  });
+  // Object.keys(process.env).forEach(key => {
+  //   if (key.startsWith("REACT_")) {
+  //     definePluginObj[`process.env.${key}`] = JSON.stringify(process.env[key]);
+  //   }
+  // });
 
   const miniCssFileName = !(isLocal || isCypress)
     ? "assets/css/style.[contenthash].css"
@@ -132,7 +132,7 @@ export default function (env, args, isProd = false) {
   if (isServer) {
     plugins.push(new CleanWebpackPlugin());
     plugins.push(new Dotenv({
-      path: join(process.cwd(), "..", `docker-pull-auto-gd/env/react-ssr-doc/${env.ENV.env}`),
+      path: join(process.cwd(), "..", `docker-pull-auto-gd/env/react-ssr-doc/${env.ENV}.env`),
       defaults: true
     }));
   } else {
