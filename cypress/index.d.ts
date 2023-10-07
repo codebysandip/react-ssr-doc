@@ -8,7 +8,7 @@ declare namespace Cypress {
     /**
      * visitAsHtml command will remove all scripts from response
      * to mimic Javascript disabled scenario
-     * this way can check page fully rendered on server or not
+     * this way can check page fully rendered on server or not for SSR
      */
     visitAsHtml: (route: string) => void;
     mount: typeof import("cypress/react18").mount;
